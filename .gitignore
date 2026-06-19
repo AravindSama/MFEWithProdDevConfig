@@ -40,3 +40,5 @@ coverage/
 # lock files (optional)
 pnpm-lock.yaml
 yarn.lock
+
+package-lock.json

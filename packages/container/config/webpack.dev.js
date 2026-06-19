@@ -6,13 +6,9 @@ const common = require('./webpack.common.js');
 const devConfig = {
     mode: 'development',
     devServer: {
-        port: 8081,
+        port: 8080,
         historyApiFallback: {
             index: 'index.html'
-        },
-        headers: {
-            'Access-Control-Allow-Origin': '*',
-            'Cross-Origin-Resource-Policy': 'cross-origin',
         },
     },
     plugins: [
@@ -20,10 +16,9 @@ const devConfig = {
             template: './public/index.html',
         }),
         new ModuleFederationPlugin({
-            name: 'marketing',
-            filename: 'remoteEntry.js',
-            exposes: {
-                './MarketingApp': './src/bootstrap.js',
+            name: 'container',
+            remotes: {
+                marketing: 'marketing@http://localhost:8081/remoteEntry.js',
             },
             shared: ['react', 'react-dom'],
         }),
